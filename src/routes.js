@@ -1,11 +1,11 @@
 const { Router } = require('express')
 
 const SessionController = require('./app/controllers/SessionController') 
-
+const EmpresaController = require('./app/controllers/EmpresaController')
 
 const routes  = new Router()
 
-routes.get('/session', SessionController.store)
-
+routes.get('/empresa', EmpresaController.index)
+routes.post('/empresa', EmpresaController.store)
 
 module.exports = routes

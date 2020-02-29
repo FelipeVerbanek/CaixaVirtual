@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 
-const Empresa = require('../models/Empresa')
+const Empresa = require('../app/models/Empresa')
 
 const databaseConfig = require('../configs/database')
 
