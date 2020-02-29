@@ -6,7 +6,7 @@ class CategoriaController{
         try{
             const categorias = await Categoria.findAll({
                 where: {id_empresa: req.idEmp},
-                attributes: ['id','nome', 'created_at', 'updated_at'],            
+                attributes: ['id','name', 'created_at', 'updated_at'],            
                 order: ['id']
             })
     
@@ -20,7 +20,7 @@ class CategoriaController{
 
         try{                        
             const categoria = await Categoria.create({
-                nome: req.body.nome,
+                name: req.body.name,
                 id_empresa: req.idEmp
             })            
 
@@ -44,12 +44,12 @@ class CategoriaController{
             if(valid)
             {
                 await Categoria.update({
-                        nome: req.body.nome
+                        name: req.body.name
                 },{
                     where:{   id: req.params.id, id_empresa: req.idEmp}
                 })
             }else{
-                return res.json({error: 'Categoria não localizada para ser alterada!'})
+                return res.status(401).json({error: 'Categoria não localizada para ser alterada!'})
             }
 
             return res.json(categoria)

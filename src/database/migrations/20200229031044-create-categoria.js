@@ -17,7 +17,7 @@ module.exports = {
           onDelete: 'SET NULL',
           allowNull: true    
         },
-        nome: {
+        name: {
           type: Sequelize.STRING,
           allowNull: false
         },

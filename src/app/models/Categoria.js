@@ -3,7 +3,7 @@ const  { Sequelize, Model } = require('sequelize')
 class Categoria extends Model{
     static init(sequelize) {
         super.init({            
-            nome: Sequelize.STRING,            
+            name: Sequelize.STRING,            
         },
         {
             sequelize,

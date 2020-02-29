@@ -17,7 +17,7 @@ module.exports = async (req, res, next)=>{
         if(!decoded.cnpj){
             return res.status(401).json({error: 'Token inválido'})
         }
-        const empresa = await Empresa.findOne({where: {cnpj: decoded.cnpj}})
+        const empresa = await Empresa.findOne({where: {cnpj: decoded.cnpj, token}})
         if(!empresa){
             return res.status(401).json({error: 'Token inválido'})
         }

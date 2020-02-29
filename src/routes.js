@@ -23,5 +23,7 @@ routes.delete('/categoria/:id', CategoriaController.delete)
 //Movimentacoes
 routes.get('/movimentacao', MovimentacaoController.index)
 routes.post('/movimentacao', MovimentacaoController.store)
+routes.put('/movimentacao/:id', MovimentacaoController.update)
+routes.delete('/movimentacao/:id', MovimentacaoController.delete)
 
 module.exports = routes
