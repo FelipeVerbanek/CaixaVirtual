@@ -10,6 +10,7 @@ class Movimentacao extends Model{
         },
         {
             sequelize,
+            tableName: 'movimentacao'
         })
 
         return this

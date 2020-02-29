@@ -4,6 +4,7 @@ const AuthMiddleware = require('./app/middlewares/auth')
 
 const CategoriaController = require('./app/controllers/CategoriaController') 
 const EmpresaController = require('./app/controllers/EmpresaController')
+const MovimentacaoController = require('./app/controllers/MovimentacaoController')
 
 const routes  = new Router()
 //Empresa
@@ -19,5 +20,8 @@ routes.post('/categoria', CategoriaController.store)
 routes.put('/categoria/:id', CategoriaController.update)
 routes.delete('/categoria/:id', CategoriaController.delete)
 
+//Movimentacoes
+routes.get('/movimentacao', MovimentacaoController.index)
+routes.post('/movimentacao', MovimentacaoController.store)
 
 module.exports = routes
