@@ -4,7 +4,7 @@ require('./database/index')
 const routes = require('./routes')
 
 class App{
-    constructor(){
+    constructor(){        
         this.server = express()
         this.moddlewares()
         this.routes()

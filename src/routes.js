@@ -8,6 +8,7 @@ const MovimentacaoController = require('./app/controllers/MovimentacaoController
 
 const routes  = new Router()
 //Empresa
+
 routes.get('/empresa', EmpresaController.index)
 routes.post('/empresa', EmpresaController.store)
 
