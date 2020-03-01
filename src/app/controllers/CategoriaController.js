@@ -52,7 +52,7 @@ class CategoriaController{
                 return res.status(401).json({error: 'Categoria não localizada para ser alterada!'})
             }
 
-            return res.json(categoria)
+            return res.json({message: 'Categoria alterada com sucesso!'})
         }catch(err){
             return res.status(500).json({error: err.message})
         }

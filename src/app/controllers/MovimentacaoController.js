@@ -1,4 +1,4 @@
-const {startOfDay , endOfDay, parseISO} = require('date-fns')
+const {startOfDay , endOfDay, parseISO, isAfter,is} = require('date-fns')
 const { Op } = require('sequelize')
 
 const Movimentacao = require('../models/Movimentacao')
@@ -11,8 +11,10 @@ class MovimentacaoController{
             
                 const dataIni = parseISO(req.query.data_ini)
                 const dataFim = parseISO(req.query.data_fim)
-                console.log(dataIni)
-                console.log(dataFim)
+                                
+                if(!isAfter(endOfDay(dataFim), startOfDay(dataIni))){
+                    return res.status(400).json({error: 'Data final não pode ser menor que a data inicial!'})
+                }                
 
                 const movimentacoes = await Movimentacao.findAll({
                     attributes: ['data','id','tipo', 'valor', 'descricao'],
@@ -27,7 +29,8 @@ class MovimentacaoController{
                             [Op.between]: [
                                 startOfDay(dataIni), endOfDay(dataFim)
                             ]
-                        }                        
+                        },
+                        id_empresa: req.idEmp                        
                     }                    
                 })
                 let valorTotal = 0
@@ -40,7 +43,29 @@ class MovimentacaoController{
 
                 return res.json(retorno)
             }else{
-    
+                
+                const movimentacoes = await Movimentacao.findAll({
+                    attributes: ['data','id','tipo', 'valor', 'descricao'],
+                    include:[{
+                        model: Categoria,
+                        as: 'categoria',
+                        attributes: ['id','name' ]
+                    }]
+                    ,
+                    where:{
+                        id_empresa: req.idEmp                        
+                    }                    
+                })
+
+                let valorTotal = 0
+                movimentacoes.forEach(element => {
+                    valorTotal = element.tipo == 'E' ? valorTotal + element.valor : valorTotal - element.valor
+                    
+                });
+
+                const retorno = {saldoTotal: valorTotal, movimentacoes}
+
+                return res.json(retorno)
             }
         }catch(err){
             return res.status(500).json({error: err.message})
@@ -53,6 +78,17 @@ class MovimentacaoController{
     async store(req, res){
         try{
             const {id_categoria, tipo, valor, descricao, data} = req.body
+            
+            const categoria = await Categoria.findOne({
+                where: {
+                    id: id_categoria,
+                    id_empresa: req.idEmp
+                }
+            })
+            
+            if(!categoria){
+                return res.json({error: 'id_categoria não localizado!'})
+            }
 
             const movimentacao = await Movimentacao.create({
                 id_categoria, 
