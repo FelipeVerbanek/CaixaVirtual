@@ -3,26 +3,11 @@ version: '3'
 services:
     leaderboard-api:
         build: .
-        container_name: leaderboard-api
-        command: yarn sequelize db:migrate
+        container_name: leaderboard-api        
         ports:
             - '3000:3000'
-        depends_on: 
-            - leaderboard-postgres
         networks: 
             - leaderboard-network
-    leaderboard-postgres:
-        image: postgres:11
-        container_name: leaderboard-postman
-        environment: 
-            - POSTGRES_PASSWORD=docker
-        ports:
-            - '5432:5432'
-        volumes: 
-            - leaderboard-postgres-data:/data
-
-volumes:
-    leaderboard-postgres-data:
 
 networks: 
     leaderboard-network:

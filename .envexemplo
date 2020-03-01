@@ -1,0 +1,5 @@
+POSTGRES_PASSWORD=docker
+DB_HOST=192.168.99.100
+DB_USER=postgres
+DB_PASS=docker
+DB_NAME=caixavirtual
