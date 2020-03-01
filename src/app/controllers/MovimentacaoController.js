@@ -79,6 +79,7 @@ class MovimentacaoController{
         try{
             const {id_categoria, tipo, valor, descricao, data} = req.body
             
+            
             const categoria = await Categoria.findOne({
                 where: {
                     id: id_categoria,
@@ -88,6 +89,9 @@ class MovimentacaoController{
             
             if(!categoria){
                 return res.json({error: 'id_categoria não localizado!'})
+            }
+            if(!await Movimentacao.checkTipo(tipo)){
+                return res.status(400).json({error: 'O campos tipo aceita os valores E - (ENTRADA) ou S - (SAÍDA)'})
             }
 
             const movimentacao = await Movimentacao.create({
@@ -119,7 +123,7 @@ class MovimentacaoController{
                     id_empresa: req.idEmp
                 }
             })
-            I
+            
             return res.json({message: 'Alteração realizada com sucesso!'})           
             
         }catch(err){

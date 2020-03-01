@@ -20,6 +20,10 @@ class Movimentacao extends Model{
         this.belongsTo(models.Categoria, {foreignKey: 'id_categoria', as: 'categoria'}) 
     }
 
+    static checkTipo(tipo){
+        return tipo == 'E' || tipo == 'S' ? true : false
+    }
+
     
 }
 
