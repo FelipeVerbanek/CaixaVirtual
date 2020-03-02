@@ -47,8 +47,8 @@ yarn test
 ```
 npm run test
 ```
-## Rodando projeto com docker
-Para rodar o projeto com o docker compose execute:
+## Inicializar projeto com docker
+Para inicializar o projeto com o docker compose execute:
 ```
 docker-compose up
 ```
