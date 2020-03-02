@@ -103,9 +103,9 @@ class MovimentacaoController{
                 data: data ? data:  new Date() 
             })
     
-            return res.json(movimentacao)
+            return res.status(201).json(movimentacao)
         }catch(err){
-            return res.status().json({error: err.message})
+            return res.status(500).json({error: err.message})
         }
 
     }

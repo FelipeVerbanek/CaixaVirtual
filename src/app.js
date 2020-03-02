@@ -1,4 +1,5 @@
-require('dotenv/config')
+require('./bootstrap')
+
 const express = require('express')
 const cors = require('cors')
 require('./database/index')
@@ -6,6 +7,7 @@ const routes = require('./routes')
 
 class App{
     constructor(){        
+        console.log('entrou')
         this.server = express()
         this.moddlewares()
         this.routes()

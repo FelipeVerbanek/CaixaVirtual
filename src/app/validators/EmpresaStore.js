@@ -21,6 +21,7 @@ module.exports = async (req, res, next)=> {
 
         return next();
     }catch(err){
-        return res.status(400).json({error: err.message})
+        const message = err.inner.map(element => element.message)
+        return res.status(400).json({error: message })
     }
 } 

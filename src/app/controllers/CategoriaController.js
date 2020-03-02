@@ -24,11 +24,10 @@ class CategoriaController{
                 id_empresa: req.idEmp
             })            
 
-            return res.json(categoria)
+            return res.status(201).json(categoria)
         }catch(err){
             return res.status(500).json({error: err.message})
         }
-
         
     }
     async update(req, res){
@@ -49,7 +48,7 @@ class CategoriaController{
                     where:{   id: req.params.id, id_empresa: req.idEmp}
                 })
             }else{
-                return res.status(401).json({error: 'Categoria não localizada para ser alterada!'})
+                return res.status(400).json({error: 'Categoria não localizada para ser alterada!'})
             }
 
             return res.json({message: 'Categoria alterada com sucesso!'})

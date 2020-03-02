@@ -7,7 +7,7 @@ const Empresa = require('../models/Empresa')
 module.exports = async (req, res, next)=>{
     const authHeader = req.headers.authorization    
     if(!authHeader){
-        return res.status(401).json({ error: 'Token inválido'})
+        return res.status(400).json({ error: 'Token informado é inválido'})
     }    
     const [, token] = authHeader.split(' ')
 
@@ -15,16 +15,18 @@ module.exports = async (req, res, next)=>{
         const decoded = await promisify(jwt.verify)(token, 'teste')   
         
         if(!decoded.cnpj){
-            return res.status(401).json({error: 'Token inválido'})
+            return res.status(400).json({error: 'Token não é inválido'})
         }
         const empresa = await Empresa.findOne({where: {cnpj: decoded.cnpj, token}})
         if(!empresa){
-            return res.status(401).json({error: 'Token inválido'})
+            console.log('token: ' + token)
+            console.log('cnpj: ' + decoded.cnpj)
+            return res.status(400).json({error: 'Não foi possível autenticar, verifique suas informações!'})
         }
         req.idEmp = empresa.id
         return next()
 
     }catch(err){
-        return res.status(401).json({error: err.message})
+        return res.status(400).json({error: err.message})
     }
 }

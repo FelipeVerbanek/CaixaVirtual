@@ -11,12 +11,12 @@ class EmpresaController {
             const empresa = await Empresa.findOne({where: {cnpj}}) 
             
             if(!empresa){
-                return res.status(401).json({error: 'CNPJ não encontrado!'})   
+                return res.status(400).json({error: 'CNPJ não encontrado!'})   
             }
 
 
             if(!(await empresa.checkPassword(req.body.password))){                
-                return res.status(401).json({ error: 'Senha incorreta!'})
+                return res.status(400).json({ error: 'Senha incorreta!'})
             }
             
 
@@ -34,7 +34,7 @@ class EmpresaController {
             const empresa = await Empresa.findOne({where: {cnpj}})            
 
             if(empresa){
-                return res.status(401).json({error: 'Cnpj já cadastrado!'})            
+                return res.status(400).json({error: 'Cnpj já cadastrado!'})            
             }
     
             const {id, token} = await Empresa.create({
