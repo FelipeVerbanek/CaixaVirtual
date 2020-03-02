@@ -43,7 +43,7 @@ class EmpresaController {
                 razaosocial, 
                 token: jwt.sign(
                     {cnpj},
-                    'teste')
+                    process.env.SECRET_API)
             })
     
             return res.status(201).json({id, token})

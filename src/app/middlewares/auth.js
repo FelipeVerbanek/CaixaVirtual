@@ -12,7 +12,7 @@ module.exports = async (req, res, next)=>{
     const [, token] = authHeader.split(' ')
 
     try{        
-        const decoded = await promisify(jwt.verify)(token, 'teste') 
+        const decoded = await promisify(jwt.verify)(token, process.env.SECRET_API) 
         console.log(decoded)
         if(!decoded.cnpj){
             return res.status(400).json({error: 'Token não é inválido'})

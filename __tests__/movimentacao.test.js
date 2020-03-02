@@ -27,7 +27,7 @@ describe('Movimentacao', () => {
 
         var valorEntrada = 0
 
-        for (let index = 0; index < 20; index++) {
+        for (let index = 0; index < 1; index++) {
             let movimentacao = await factory.attrs('Movimentacao', {
                 id_categoria: idCategoria,
                 tipo: 'E',
@@ -44,7 +44,7 @@ describe('Movimentacao', () => {
         }
 
         var valorSaida = 0
-        for (let index = 0; index < 20; index++) {
+        for (let index = 0; index < 1; index++) {
             let movimentacaoS = await factory.attrs('Movimentacao', {
                 id_categoria: idCategoria,
                 tipo: 'S',
@@ -67,7 +67,8 @@ describe('Movimentacao', () => {
             .send()
 
         const total = valorEntrada - valorSaida
-        const saldoTotal = result.body.saldoTotal
+        const saldoTotal = await parseFloat(result.body.saldoTotal)
+        
         expect(saldoTotal.toFixed(2)).toBe(total.toFixed(2))   
     })
     
