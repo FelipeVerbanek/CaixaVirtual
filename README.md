@@ -9,30 +9,46 @@ Documentação da api: https://docs.google.com/document/d/1RpqAfaTIBrbxHQ_nvNphd
   
 ## Instalação
 Instalar dependencias na maquina
-#### Utilizando yarn
+#### Utilizando yarn:
 ```
 yarn
 ```
-#### Utilizando npm
+#### Utilizando npm:
 npm install
 
 ## Inicializando o projeto no ambiente de desenvolvimento
 
-#### Utilizando yarn
+#### Utilizando yarn:
 ```
 yarn dev 
 ```
-#### Utilizando npm
+#### Utilizando npm:
 ```
 npm run dev
 ```
-## Rodar testes
+### Migrations
+Após a configuração do seu arquivo .env com o banco de dados postgres, é necessário rodar as migrations.
 
-#### Utilizando yarn
+#### Exemplo yarn:
+```
+yarn sequelize db:migrate
+```
+#### Exemplo npm
+```
+npm sequelize db:migrate
+```
+## Executar testes
+
+#### Utilizando yarn:
 ```
 yarn test
 ```
-#### Utilizando npm
+#### Utilizando npm:
 ```
 npm run test
+```
+## Rodando projeto com docker
+Para rodar o projeto com o docker compose execute:
+```
+docker-compose up
 ```
