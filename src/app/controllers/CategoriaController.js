@@ -66,7 +66,7 @@ class CategoriaController{
                     }
                 })
             
-            return categoria ? res.json({message: 'Categoria removida com sucesso!'}) : res.status(401).json({message: 'Categoria não localizada!'})
+            return categoria ? res.json({message: 'Categoria removida com sucesso!'}) : res.status(401).json({error: 'Categoria não localizada!'})
             
         }catch(err){
             return res.status(500).json({error: err.message})

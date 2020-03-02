@@ -7,7 +7,6 @@ const routes = require('./routes')
 
 class App{
     constructor(){        
-        console.log('entrou')
         this.server = express()
         this.moddlewares()
         this.routes()

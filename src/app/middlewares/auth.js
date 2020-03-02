@@ -12,15 +12,13 @@ module.exports = async (req, res, next)=>{
     const [, token] = authHeader.split(' ')
 
     try{        
-        const decoded = await promisify(jwt.verify)(token, 'teste')   
-        
+        const decoded = await promisify(jwt.verify)(token, 'teste') 
+        console.log(decoded)
         if(!decoded.cnpj){
             return res.status(400).json({error: 'Token não é inválido'})
         }
         const empresa = await Empresa.findOne({where: {cnpj: decoded.cnpj, token}})
         if(!empresa){
-            console.log('token: ' + token)
-            console.log('cnpj: ' + decoded.cnpj)
             return res.status(400).json({error: 'Não foi possível autenticar, verifique suas informações!'})
         }
         req.idEmp = empresa.id
